@@ -1,0 +1,35 @@
+###########################
+####    OverTheWire    ####
+#################### Bandit
+
+
+#   Bandit12
+Password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+Really good for identifying files and decompressing them until you reach a readable format.
+
+Method: Revert the hex dump using 'xxd' and check the file type with 'file'. Use the appropriate decompression methods for each file type.
+        Decompression methods include 'tar', 'gzip', and 'bzip2'. Check the man pages for using the commands correctly
+
+
+#   Bandit14
+Had to submit 14's password to the current level on port 30000.
+I had to look it up :( but all that had to be done was an echo piped by a netcat connection
+
+    echo '4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e' | nc localhost 30000
+
+
+#   Bandit16
+Using nmap 'nmap localhost -p 31000-32000' I was able to get a list of open ports.
+
+Open Ports: 31046 31518 31691 31790 31960
+
+I didnt properly identify the ports past this stage, I simply attempted each port with the netcat approach and the s_client approach. Eventually I revieved a private key with port 31790
+
+echo cluFn7wTiGryunymYOu4RcffSxQluehd | openssl s_client -quiet -connect localhost:31790
+
+
+#   Bandit18
+Logged in with ssh the normal way but used a sh session instead
+'ssh -t bandit18@bandit.labs.overthewire.org -p 2220 /bin/sh'
+Then read the appropriate file
+
